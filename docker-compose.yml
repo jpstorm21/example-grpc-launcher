@@ -2,11 +2,11 @@ version: '3'
 
 services:
   users-ms:
-    build: ./microservice-users
+    build: ./ms-users
     ports:
       - "50051:50051"
     volumes:
-      - ./microservice-users/src:/usr/src/app/src
+      - ./ms-users/src:/usr/src/app/src
     command: npm run start:dev
     networks:
       - nest-grpc-network
