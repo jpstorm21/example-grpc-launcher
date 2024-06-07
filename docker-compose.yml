@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  users-ms:
+    build: ./microservice-users
+    ports:
+      - "50051:50051"
+    volumes:
+      - ./microservice-users/src:/usr/src/app/src
+    command: npm run start:dev
+    networks:
+      - nest-grpc-network
+
+  client-gateway:
+    build: ./gateway
+    ports:
+      - 8000:8000
+    volumes:
+      - ./gateway/src:/usr/src/app/src
+    command: npm run start:dev
+    environment:
+      - GRPC_SERVER_URL=users-ms:50051
+    networks:
+      - nest-grpc-network
+
+  
+networks:
+  nest-grpc-network:
+    driver: bridge
