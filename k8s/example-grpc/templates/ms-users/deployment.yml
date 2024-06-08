@@ -3,30 +3,25 @@ kind: Deployment
 metadata:
   creationTimestamp: null
   labels:
-    app: gateway
-  name: gateway
+    app: ms-users
+  name: ms-users
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: gateway
+      app: ms-users
   strategy: {}
   template:
     metadata:
       creationTimestamp: null
       labels:
-        app: gateway
+        app: ms-users
     spec:
       containers:
-      - image: ejemplo-grpc-nest-client-gateway
-        name: ejemplo-grpc-nest-client-gateway
+      - image: example-grpc-launcher-users-ms
+        name: example-grpc-launcher-users-ms
         imagePullPolicy: Never
         command: ["npm"]
         args: ["run", "start:dev"]
-        env:
-        - name: PORT
-          value: "8000"
-        - name: GRPC_SERVER_URL
-          value: "ms-users:50051"
         resources: {}
 status: {}
