@@ -14,12 +14,13 @@ services:
   client-gateway:
     build: ./gateway
     ports:
-      - 8000:8000
+      - ${CLIENT_GATEWAY_PORT}:8000
     volumes:
       - ./gateway/src:/usr/src/app/src
     command: npm run start:dev
     environment:
       - GRPC_SERVER_URL=users-ms:50051
+      - PORT=8000
     networks:
       - nest-grpc-network
 
